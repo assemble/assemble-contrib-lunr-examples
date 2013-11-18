@@ -24,9 +24,22 @@ module.exports = function(grunt) {
         partials: ['templates/includes/*.hbs'],
         plugins: ['assemble-contrib-lunr'],
         layouts: 'templates/layouts',
+        lunr: {
+          dataPath: '_gh_pages/assets/search_data.json'
+        }
       },
       example: {
         files: {'_gh_pages/': ['templates/*.hbs']}
+      }
+    },
+
+    connect: {
+      server: {
+        options: {
+          keepalive: true,
+          port: 1337,
+          base: '_gh_pages'
+        }
       }
     },
 
@@ -39,6 +52,7 @@ module.exports = function(grunt) {
 
   // Load npm plugins to provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('assemble');
 
   // Default tasks to be run.
